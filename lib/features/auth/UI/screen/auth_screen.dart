@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_out/features/auth/UI/screen/sign_up.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -11,7 +12,7 @@ class AuthScreen extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/loading screen.png',
+              'assets/loading screen.png', // تأكد من اسم الملف
               fit: BoxFit.cover,
             ),
           ),
@@ -26,23 +27,26 @@ class AuthScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Image.asset(
-                    'assets/Logo__Go_Out__with_Social_Elements-removebg-preview.png',
+                    'assets/Logo__Go_Out__with_Social_Elements-removebg-preview.png', // تأكد من اسم الملف
                     fit: BoxFit.contain,
                   ),
                 ),
                 const SizedBox(height: 50),
-                GlowButton(
+                HoverGlowButton(
                   label: 'Create account',
                   icon: Icons.arrow_forward_ios,
                   onTap: () {
-                    // Navigate to create account page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                    );
                   },
                 ),
                 const SizedBox(height: 20),
-                GlowButton(
+                HoverGlowButton(
                   label: 'Log in',
                   onTap: () {
-                    // Navigate to login page
+                    Navigator.pushNamed(context, '/login'); // تأكد من وجود هذه الروت
                   },
                 ),
               ],
@@ -54,12 +58,12 @@ class AuthScreen extends StatelessWidget {
   }
 }
 
-class GlowButton extends StatefulWidget {
+class HoverGlowButton extends StatefulWidget {
   final String label;
   final IconData? icon;
   final VoidCallback onTap;
 
-  const GlowButton({
+  const HoverGlowButton({
     super.key,
     required this.label,
     this.icon,
@@ -67,53 +71,66 @@ class GlowButton extends StatefulWidget {
   });
 
   @override
-  State<GlowButton> createState() => _GlowButtonState();
+  State<HoverGlowButton> createState() => _HoverGlowButtonState();
 }
 
-class _GlowButtonState extends State<GlowButton> {
+class _HoverGlowButtonState extends State<HoverGlowButton> {
+  bool _isHovered = false;
   bool _isPressed = false;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      onTapDown: (_) => setState(() => _isPressed = true),
-      onTapUp: (_) => setState(() => _isPressed = false),
-      onTapCancel: () => setState(() => _isPressed = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        width: 250,
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-        decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.8), // الخلفية سودة
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: _isPressed
-              ? [
-            BoxShadow(
-              color: Color(0xff0932CC).withOpacity(0.6),
-              blurRadius: 50,
-              spreadRadius: 15,
-              offset: const Offset(0,0),
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        onTapDown: (_) => setState(() => _isPressed = true),
+        onTapUp: (_) => setState(() => _isPressed = false),
+        onTapCancel: () => setState(() => _isPressed = false),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          width: 250,
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.8),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(
+              color: _isHovered ? Color(0xff0932CC) : Colors.transparent,
+              width: 1.5,
             ),
-          ]
-              : [],
-        ),
-        child: Row(
-          mainAxisAlignment: widget.icon != null
-              ? MainAxisAlignment.spaceBetween
-              : MainAxisAlignment.center,
-          children: [
-            Text(
-              widget.label,
-              style: const TextStyle(color: Colors.white, fontSize: 16 ),
-            ),
-            if (widget.icon != null)
-              Icon(
-                widget.icon,
-                color: Colors.white,
-                size: 16,
+            boxShadow: _isHovered || _isPressed
+                ? [
+              BoxShadow(
+                color: Color(0xff0932CC).withOpacity(_isPressed ? 0.6 : 0.4),
+                blurRadius: _isPressed ? 50 : 30,
+                spreadRadius: _isPressed ? 15 : 5,
+                offset: Offset.zero,
               ),
-          ],
+            ]
+                : [],
+          ),
+          child: Row(
+            mainAxisAlignment: widget.icon != null
+                ? MainAxisAlignment.spaceBetween
+                : MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.label,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              if (widget.icon != null)
+                Icon(
+                  widget.icon,
+                  color: Colors.white,
+                  size: 16,
+                ),
+            ],
+          ),
         ),
       ),
     );
