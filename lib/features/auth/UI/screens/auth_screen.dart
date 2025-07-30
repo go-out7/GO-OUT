@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
@@ -14,46 +15,34 @@ class AuthScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-
-
           Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  height:200,
+                  height: 200,
                   width: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  //padding: const EdgeInsets.all(20),
                   child: Image.asset(
                     'assets/Logo__Go_Out__with_Social_Elements-removebg-preview.png',
                     fit: BoxFit.contain,
-
                   ),
                 ),
                 const SizedBox(height: 50),
-
-                // زر إنشاء حساب
-                _glowButton(
-                  backgroundColor: Colors.black,
-                  context: context,
+                GlowButton(
                   label: 'Create account',
                   icon: Icons.arrow_forward_ios,
                   onTap: () {
-                    // navigate to create account page
+                    // Navigate to create account page
                   },
                 ),
                 const SizedBox(height: 20),
-
-                // زر تسجيل الدخول
-                _glowButton(
-                  backgroundColor: Colors.black,
-                  context: context,
+                GlowButton(
                   label: 'Log in',
                   onTap: () {
-                    // navigate to login page
+                    // Navigate to login page
                   },
                 ),
               ],
@@ -63,45 +52,64 @@ class AuthScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _glowButton({
-    required BuildContext context,
-    required String label,
-    IconData? icon,
-    required VoidCallback onTap, required Color backgroundColor,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(15),
-      splashColor: Colors.white.withOpacity(0.2),
-      highlightColor: Colors.white.withOpacity(0.05),
-      child: Ink(
+class GlowButton extends StatefulWidget {
+  final String label;
+  final IconData? icon;
+  final VoidCallback onTap;
+
+  const GlowButton({
+    super.key,
+    required this.label,
+    this.icon,
+    required this.onTap,
+  });
+
+  @override
+  State<GlowButton> createState() => _GlowButtonState();
+}
+
+class _GlowButtonState extends State<GlowButton> {
+  bool _isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.onTap,
+      onTapDown: (_) => setState(() => _isPressed = true),
+      onTapUp: (_) => setState(() => _isPressed = false),
+      onTapCancel: () => setState(() => _isPressed = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
         width: 250,
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.7),
+          color: Colors.black.withOpacity(0.8), // الخلفية سودة
           borderRadius: BorderRadius.circular(15),
-          boxShadow: [
+          boxShadow: _isPressed
+              ? [
             BoxShadow(
-              color: Colors.blueAccent.withOpacity(0.3),
-              blurRadius: 15,
-              spreadRadius: 1,
-              offset: const Offset(0, 5),
+              color: Color(0xff0932CC).withOpacity(0.6),
+              blurRadius: 70,
+              spreadRadius: 15,
+              offset: const Offset(0,0),
             ),
-          ],
+          ]
+              : [],
         ),
         child: Row(
-          mainAxisAlignment: icon != null
+          mainAxisAlignment: widget.icon != null
               ? MainAxisAlignment.spaceBetween
               : MainAxisAlignment.center,
           children: [
             Text(
-              label,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
+              widget.label,
+              style: const TextStyle(color: Colors.white, fontSize: 16 ),
             ),
-            if (icon != null)
+            if (widget.icon != null)
               Icon(
-                icon,
+                widget.icon,
                 color: Colors.white,
                 size: 16,
               ),

@@ -1,6 +1,6 @@
 {
-    "name": "go_out",
-    "short_name": "go_out",
+    "name": "GO OUT",
+    "short_name": "GO OUT",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
@@ -10,7 +10,7 @@
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "icons/Icon-192.png",
+            "src": "Logo__Go_Out__with_Social_Elements-removebg-preview.png",
             "sizes": "192x192",
             "type": "image/png"
         },
