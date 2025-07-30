@@ -91,7 +91,7 @@ class _GlowButtonState extends State<GlowButton> {
               ? [
             BoxShadow(
               color: Color(0xff0932CC).withOpacity(0.6),
-              blurRadius: 70,
+              blurRadius: 50,
               spreadRadius: 15,
               offset: const Offset(0,0),
             ),

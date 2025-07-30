@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_out/features/auth/UI/screens/auth_screen.dart';
+import 'package:go_out/features/auth/UI/screen/auth_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
