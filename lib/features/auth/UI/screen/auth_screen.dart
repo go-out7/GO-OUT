@@ -12,7 +12,7 @@ class AuthScreen extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/loading screen.png', // تأكد من اسم الملف
+              'assets/loading screen.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -46,7 +46,7 @@ class AuthScreen extends StatelessWidget {
                 HoverGlowButton(
                   label: 'Log in',
                   onTap: () {
-                    Navigator.pushNamed(context, '/login'); // تأكد من وجود هذه الروت
+                    Navigator.pushNamed(context, '/login');
                   },
                 ),
               ],

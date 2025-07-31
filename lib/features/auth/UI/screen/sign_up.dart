@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -52,7 +53,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // 🖼 خلفية
           SizedBox.expand(
             child: Image.asset(
               'assets/loading screen.png',
@@ -60,7 +60,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
 
-          // 🧊 Container بـ Glass Effect
           SafeArea(
             child: Center(
               child: SingleChildScrollView(
@@ -147,7 +146,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onPressed: () {
                                   if (isFormValid) {
                                     print("Creating account...");
-                                    // هنا تقدر تحط كود التسجيل الحقيقي
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
