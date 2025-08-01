@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_out/features/auth/UI/screen/sign_up.dart';
+import 'package:go_out/features/auth/UI/screen/log_in/log_in.dart';
+import 'package:go_out/features/auth/UI/screen/sign_up/sign_up.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -46,7 +47,10 @@ class AuthScreen extends StatelessWidget {
                 HoverGlowButton(
                   label: 'Log in',
                   onTap: () {
-                    Navigator.pushNamed(context, '/login');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    );
                   },
                 ),
               ],

@@ -1,7 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_out/features/auth/UI/screen/sign_up_num.dart';
+import 'package:go_out/features/auth/UI/screen/sign_up/sign_up_num.dart';
+
+import '../log_in/log_in.dart';
 
 
 class SignUpScreen extends StatefulWidget {
@@ -204,7 +206,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                             Center(
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                                  );
+                                },
                                 child: const Text("Already have an account? Log In", style: TextStyle(color: Colors.white)),
                               ),
                             )
