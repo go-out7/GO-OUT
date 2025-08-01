@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_out/features/auth/UI/screen/sign_up_num.dart';
 
 
 class SignUpScreen extends StatefulWidget {
@@ -145,7 +146,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 onPressed: () {
                                   if (isFormValid) {
-                                    print("Creating account...");
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (_) => const SignUpScreennum()),
+                                    );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
@@ -187,14 +191,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               onPressed: () {},
                             ),
 
-                            const SizedBox(height: 12),
-
-                            _buildSocialButton(
-                              icon: const FaIcon(FontAwesomeIcons.facebookF, color: Colors.white),
-                              label: "Sign Up with Facebook",
-                              backgroundColor: const Color(0xFF1877F2),
-                              onPressed: () {},
-                            ),
+                            // const SizedBox(height: 12),
+                            //
+                            // _buildSocialButton(
+                            //   icon: const FaIcon(FontAwesomeIcons.facebookF, color: Colors.white),
+                            //   label: "Sign Up with Facebook",
+                            //   backgroundColor: const Color(0xFF1877F2),
+                            //   onPressed: () {},
+                            // ),
 
                             const SizedBox(height: 20),
 
