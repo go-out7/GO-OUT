@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_out/features/auth/UI/screen/forget_password/rest_password.dart';
 
 class Otp_forgetScreen extends StatelessWidget {
   const Otp_forgetScreen({super.key});
@@ -15,7 +16,7 @@ class Otp_forgetScreen extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/loading screen.png'), // ضع الصورة الخلفية هنا
+                image: AssetImage('assets/loading screen.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -48,7 +49,7 @@ class Otp_forgetScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         const Text(
-                          'Enter 4 digit code that you receive on your\nnumber (+201234567890).',
+                          'Enter 4 digit code that your receive on your\nemail (email@gmail.com).',
                           style: TextStyle(color: Colors.white70),
                           textAlign: TextAlign.center,
                         ),
@@ -87,7 +88,7 @@ class Otp_forgetScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                         RichText(
                           text: TextSpan(
-                            text: 'sms not received? ',
+                            text: 'email not received? ',
                             style: const TextStyle(color: Colors.white70),
                             children: [
                               TextSpan(
@@ -105,25 +106,36 @@ class Otp_forgetScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.15),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.white30),
+                        GestureDetector(
+                          onTap: () {
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ResetPasswordScreen(),
                               ),
-                              child: const Center(
-                                child: Text(
-                                  'Create an Account',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                            );
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.15),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(color: Colors.white30),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'continue',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 ),
                               ),
