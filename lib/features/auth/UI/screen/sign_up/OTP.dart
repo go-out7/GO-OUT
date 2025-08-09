@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../nav_bar/UI/screens/nav_bar.dart';
+
 class OtpScreen extends StatelessWidget {
   const OtpScreen({super.key});
 
@@ -15,7 +17,7 @@ class OtpScreen extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/loading screen.png'), // ضع الصورة الخلفية هنا
+                image: AssetImage('assets/loading screen.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -97,9 +99,7 @@ class OtpScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   decoration: TextDecoration.underline,
                                 ),
-                                recognizer: TapGestureRecognizer()..onTap = () {
-                                  // TODO: handle resend logic
-                                },
+                                recognizer: TapGestureRecognizer()..onTap = () {},
                               ),
                             ],
                           ),
@@ -109,21 +109,31 @@ class OtpScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.15),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.white30),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Create an Account',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const navbar(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.15),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(color: Colors.white30),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    'Create an Account',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -138,6 +148,22 @@ class OtpScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CreateAccountScreen extends StatelessWidget {
+  const CreateAccountScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'Create Account Screen',
+          style: TextStyle(fontSize: 24),
+        ),
       ),
     );
   }

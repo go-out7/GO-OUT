@@ -3,7 +3,7 @@
 // void main(List<String> args) {
 //   if (args.isEmpty) {
 //     print(
-//       'Please provide a screen name.\nUsage: dart folder_structure.dart <screen_name>',
+//       'Please provide a screen name.\nUsage: dart folders.dart "name_of_screen"',
 //     );
 //     return;
 //   }
